@@ -5,6 +5,8 @@ const path = require('path');
 
 const generateMarkdown = require("./utils/generateMarkdown");
 
+const licenseOptions = ["mit license", "apache license 2.0", "gnu gplv3"];
+
 // TODO: Create an array of questions for user input
 const questions = [
     {
@@ -47,6 +49,12 @@ const questions = [
         name: 'email',
         message: 'Please provide your email address for users to contact you for questions.',
     },
+    {
+        type: 'list',
+        name: 'license',
+        message: 'Please choose a license from the following: MIT, apache 2.0, gnu gplv3.',
+        choices: licenseOptions,
+    },
 ];
 
 // TODO: Create a function to write README file
@@ -59,7 +67,7 @@ function init() {
     inquirer.prompt(questions)
     .then((answers) => {
         const markdownPageContent = generateMarkdown(answers);
-        writeToFile("README.EXAMPLE.md", markdownPageContent)
+        writeToFile("README.md", markdownPageContent)
     })
 }
 
